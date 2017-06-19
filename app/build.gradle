@@ -2,20 +2,71 @@ apply plugin: 'com.android.application'
 apply plugin: 'project-report'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    // Manifest version information!
+    def versionMajor = 1
+    def versionMinor = 0
+    def versionPatch = 0
+    def buildSuffix = "a"
+
     defaultConfig {
         applicationId "com.cabbage.scaffold"
-        minSdkVersion 21
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode = (versionMajor * 10 + versionMinor) * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    def keyStorePath = System.getenv("ANDROID_KEYSTORE_PATH")
+    keyStorePath = keyStorePath == null ? "C:/KeyStore/" : keyStorePath
+
+    print keyStorePath
+    File propsFile = new File(keyStorePath + 'key_props_leo.txt')
+    def localKeyStore = propsFile.exists()
+
+    if (localKeyStore) {
+        println 'Using local key store'
+        def props = new Properties()
+        props.load(new FileInputStream(propsFile))
+
+        def debugConfigName = 'debug'
+        def releaseConfigName = 'release'
+
+        signingConfigs {
+            debug {
+                storeFile = file(keyStorePath + props[debugConfigName + 'StoreFile'])
+                storePassword = props[debugConfigName + 'StorePassword']
+                keyAlias = props[debugConfigName + 'KeyAlias']
+                keyPassword = props[debugConfigName + 'KeyPassword']
+            }
+
+            release {
+                storeFile = file(keyStorePath + props[releaseConfigName + 'StoreFile'])
+                storePassword = props[releaseConfigName + 'StorePassword']
+                keyAlias = props[releaseConfigName + 'KeyAlias']
+                keyPassword = props[releaseConfigName + 'KeyPassword']
+
+            }
+        }
+    }
+
+
     buildTypes {
+        debug {
+            debuggable true
+            versionNameSuffix "debug_"+buildSuffix
+
+            if (localKeyStore) signingConfig signingConfigs.debug
+        }
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            if (localKeyStore) signingConfig signingConfigs.release
         }
     }
 }
