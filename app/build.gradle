@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'project-report'
 
 android {
@@ -69,6 +71,11 @@ android {
             if (localKeyStore) signingConfig signingConfigs.release
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
 }
 
 final support_library_version = '25.3.1'
@@ -87,12 +94,14 @@ final rx_preferences = '2.0.0-RC2'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     compile "com.android.support:design:$support_library_version"
 
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // ReactiveX
-//    compile "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
+    compile "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
     compile "io.reactivex.rxjava2:rxjava:$rx_java_version"
     compile "io.reactivex.rxjava2:rxandroid:$rx_android_version"
 
@@ -106,7 +115,7 @@ dependencies {
 
     // Butter Knife
     compile "com.jakewharton:butterknife:$butter_knife_version"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butter_knife_version"
+    kapt "com.jakewharton:butterknife-compiler:$butter_knife_version"
 
     // Dart
     compile "com.f2prateek.dart:dart:$dart_version"
