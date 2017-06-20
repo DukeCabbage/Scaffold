@@ -1,4 +1,4 @@
-package com.cabbage.scaffold.mvp
+package com.cabbage.scaffold.ui.mvp
 
 interface MvpPresenter<V : MvpView> {
 

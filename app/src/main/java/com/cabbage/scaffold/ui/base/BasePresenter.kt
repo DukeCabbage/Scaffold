@@ -1,5 +1,7 @@
-package com.cabbage.scaffold.mvp
+package com.cabbage.scaffold.ui.base
 
+import com.cabbage.scaffold.ui.mvp.MvpPresenter
+import com.cabbage.scaffold.ui.mvp.MvpView
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.plusAssign
@@ -14,7 +16,12 @@ open class BasePresenter<V : MvpView> : MvpPresenter<V> {
         }
         set(value) {
             field = value
-            if (field == null) unSubscribeAll()
+            if (field == null) {
+                Timber.v("Detach view")
+                unSubscribeAll()
+            } else {
+                Timber.v("Attach view")
+            }
         }
 
     private var mDisposables: CompositeDisposable = CompositeDisposable()
@@ -22,15 +29,18 @@ open class BasePresenter<V : MvpView> : MvpPresenter<V> {
     /**
      * Add a subscription, initialize the subscription container if needed
      */
-    protected fun addSubscription(d: Disposable) {
+    protected fun addSubscription(d: Disposable?) {
+        if (d == null) return
         if (mDisposables.isDisposed) mDisposables = CompositeDisposable()
         mDisposables += d
+
     }
 
     /**
      * Un-subscribe a subscription, if it's not in the container, dispose anyway
      */
-    protected fun unSubscribe(d: Disposable) {
+    protected fun unSubscribe(d: Disposable?) {
+        if (d == null) return
         if (!(mDisposables.remove(d))) d.dispose()
     }
 

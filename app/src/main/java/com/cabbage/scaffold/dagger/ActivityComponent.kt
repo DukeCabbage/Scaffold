@@ -1,11 +1,10 @@
 package com.cabbage.scaffold.dagger
 
-import com.cabbage.scaffold.demo.MainActivity
-import dagger.Component
+import com.cabbage.scaffold.ui.demo.MainActivity
+import dagger.Subcomponent
 
 @ActivityScope
-@Component(dependencies = arrayOf(AppComponent::class),
-           modules = arrayOf(ActivityModule::class))
+@Subcomponent(modules = arrayOf(ActivityModule::class))
 interface ActivityComponent {
 
     fun inject(mainActivity: MainActivity)
