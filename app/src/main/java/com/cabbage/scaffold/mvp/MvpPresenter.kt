@@ -1,8 +1,6 @@
 package com.cabbage.scaffold.mvp
 
-interface MvpPresenter<in V : MvpView> {
+interface MvpPresenter<V : MvpView> {
 
-    fun attachView(view: V)
-
-    fun detachView()
+    var mvpView: V?
 }

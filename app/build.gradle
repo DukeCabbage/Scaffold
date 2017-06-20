@@ -111,7 +111,7 @@ dependencies {
 
     // Dagger 2
     compile "com.google.dagger:dagger:$dagger_version"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     // Butter Knife
     compile "com.jakewharton:butterknife:$butter_knife_version"
