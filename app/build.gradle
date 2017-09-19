@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'project-report'
 
@@ -11,13 +12,13 @@ android {
     def versionMajor = 1
     def versionMinor = 0
     def versionPatch = 0
-    def buildSuffix = "a"
+    def buildNumber = 0
 
     defaultConfig {
         applicationId "com.cabbage.scaffold"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode = (versionMajor * 10 + versionMinor) * 100 + versionPatch
+        versionCode = ((versionMajor * 100 + versionMinor) * 100 + versionPatch) * 100 + buildNumber
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -55,11 +56,23 @@ android {
         }
     }
 
+    flavorDimensions "endpoint"
+
+    productFlavors {
+        Staging {
+            dimension "endpoint"
+            applicationIdSuffix ".internal"
+        }
+
+        Production {
+            dimension "endpoint"
+        }
+    }
 
     buildTypes {
         debug {
             debuggable true
-            versionNameSuffix "debug_"+buildSuffix
+            versionNameSuffix "debug_${Character.toChars(97 + buildNumber)}"
 
             if (localKeyStore) signingConfig signingConfigs.debug
         }
@@ -128,7 +141,4 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-}
-buildscript {
 }

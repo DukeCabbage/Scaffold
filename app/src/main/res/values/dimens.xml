@@ -1,3 +1,9 @@
 <resources>
+    
     <dimen name="fab_margin">16dp</dimen>
+    
+    <dimen name="small_space">8dp</dimen>
+    <dimen name="medium_space">16sp</dimen>
+    <dimen name="large_space">32dp</dimen>
+    
 </resources>
