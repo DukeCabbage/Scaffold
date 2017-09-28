@@ -17,7 +17,7 @@ class Certain {
         return max
     }
 
-    fun compare(a: Int, b: Int): Int {
+    private fun compare(a: Int, b: Int): Int {
         return if (a > b) a else b
     }
 }

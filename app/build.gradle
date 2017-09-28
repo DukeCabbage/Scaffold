@@ -23,34 +23,27 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    def keyStorePath = System.getenv("ANDROID_KEYSTORE_PATH")
-    keyStorePath = keyStorePath == null ? "C:/KeyStore/" : keyStorePath
-
-    print keyStorePath
-    File propsFile = new File(keyStorePath + 'key_props_leo.txt')
-    def localKeyStore = propsFile.exists()
-
+    File propsFile = rootProject.file("keystore.properties")
+    boolean localKeyStore = propsFile.exists()
     if (localKeyStore) {
         println 'Using local key store'
-        def props = new Properties()
-        props.load(new FileInputStream(propsFile))
 
-        def debugConfigName = 'debug'
-        def releaseConfigName = 'release'
+        Properties properties = new Properties()
+        properties.load(propsFile.newDataInputStream())
 
         signingConfigs {
             debug {
-                storeFile = file(keyStorePath + props[debugConfigName + 'StoreFile'])
-                storePassword = props[debugConfigName + 'StorePassword']
-                keyAlias = props[debugConfigName + 'KeyAlias']
-                keyPassword = props[debugConfigName + 'KeyPassword']
+                storeFile = file(properties.getProperty("debugStoreFile"))
+                storePassword = properties.getProperty("debugStorePassword")
+                keyAlias = properties.getProperty("debugKeyAlias")
+                keyPassword = properties.getProperty("debugKeyPassword")
             }
 
             release {
-                storeFile = file(keyStorePath + props[releaseConfigName + 'StoreFile'])
-                storePassword = props[releaseConfigName + 'StorePassword']
-                keyAlias = props[releaseConfigName + 'KeyAlias']
-                keyPassword = props[releaseConfigName + 'KeyPassword']
+                storeFile = file(properties.getProperty("releaseStoreFile"))
+                storePassword = properties.getProperty("releaseStorePassword")
+                keyAlias = properties.getProperty("releaseKeyAlias")
+                keyPassword = properties.getProperty("releaseKeyPassword")
 
             }
         }
@@ -91,9 +84,9 @@ android {
     }
 }
 
-final support_library_version = '25.3.1'
+final support_library_version = '26.1.0'
 final dagger_version = '2.11'
-final butter_knife_version = '8.6.0'
+final butter_knife_version = '8.8.1'
 final dart_version = '2.0.+'
 final timber_version = '4.5.1'
 
@@ -110,8 +103,6 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     compile "com.android.support:design:$support_library_version"
-
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // ReactiveX
     compile "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
