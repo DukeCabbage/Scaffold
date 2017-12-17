@@ -6,7 +6,6 @@ import butterknife.ButterKnife
 import com.cabbage.scaffold.BuildConfig
 import com.cabbage.scaffold.R
 import com.cabbage.scaffold.ui.base.BaseActivity
-import com.cabbage.scaffold.ui.mvp.MvpView
 import com.jakewharton.rxbinding2.view.RxView
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.disposables.Disposable
@@ -16,12 +15,12 @@ import kotlinx.android.synthetic.main.content_main.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MvpView {
+class MainActivity : BaseActivity(), MainContract.View {
 
     @Inject lateinit var presenter: MainPresenter
     @Inject lateinit var rxPermission: RxPermissions
 
-    var clickSub: Disposable? = null
+    private var clickSubscription: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,15 +41,14 @@ class MainActivity : BaseActivity(), MvpView {
         presenter.mvpView = this
         presenter.ensureLocationPermission(rxPermission)
 
-        clickSub = RxView.clicks(fab).subscribeBy(onNext = { presenter.ensureLocationPermission(rxPermission) })
+        clickSubscription = RxView.clicks(fab).subscribeBy(onNext = { presenter.ensureLocationPermission(rxPermission) })
     }
 
     public override fun onStop() {
         super.onStop()
         Timber.v("onStop")
+        clickSubscription?.dispose()
         presenter.mvpView = null
-
-        clickSub?.dispose()
     }
 
     override fun onDestroy() {
@@ -58,7 +56,7 @@ class MainActivity : BaseActivity(), MvpView {
         Timber.v("onDestroy")
     }
 
-    fun showLocationPermissionResult(granted: Boolean) {
+    override fun showLocationPermissionResult(granted: Boolean) {
         Toast.makeText(this, "Granted: $granted", Toast.LENGTH_SHORT).show()
     }
 }

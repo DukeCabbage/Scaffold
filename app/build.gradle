@@ -8,17 +8,22 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
-    // Manifest version information!
-    def versionMajor = 1
+    def versionMajor = 0
     def versionMinor = 0
-    def versionPatch = 0
+    def versionPatch = 2
     def buildNumber = 0
+
+    def versionCodeBase = ((versionMajor * 100 + versionMinor) * 100 + versionPatch) * 100 + buildNumber
+    def debugVersionNameSuffix = "debug_${Character.toChars(97 + buildNumber)}"
+    println "Version code : $versionCodeBase"
+    println "Version name suffix: ${Character.toChars(97 + buildNumber)}"
+    println ""
 
     defaultConfig {
         applicationId "com.cabbage.scaffold"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode = ((versionMajor * 100 + versionMinor) * 100 + versionPatch) * 100 + buildNumber
+        versionCode = versionCodeBase
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -65,7 +70,7 @@ android {
     buildTypes {
         debug {
             debuggable true
-            versionNameSuffix "debug_${Character.toChars(97 + buildNumber)}"
+            versionNameSuffix debugVersionNameSuffix
 
             if (localKeyStore) signingConfig signingConfigs.debug
         }
@@ -84,30 +89,20 @@ android {
     }
 }
 
-final support_library_version = '26.1.0'
-final dagger_version = '2.11'
-final butter_knife_version = '8.8.1'
-final dart_version = '2.0.+'
-final timber_version = '4.5.1'
-
-final rx_java_version = '2.1.0'
-final rx_android_version = '2.0.1'
-final rx_kotlin_version = '2.0.3'
-final rx_permission = '0.9.4@aar'
-final rx_binding = '2.0.0'
-final rx_preferences = '2.0.0-RC2'
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
+    compile "com.android.support:appcompat-v7:$support_library_version"
+    compile "com.android.support:recyclerview-v7:$support_library_version"
+    compile "com.android.support:cardview-v7:$support_library_version"
     compile "com.android.support:design:$support_library_version"
 
     // ReactiveX
-    compile "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
-    compile "io.reactivex.rxjava2:rxjava:$rx_java_version"
+    compile "io.reactivex.rxjava2:rxjava:$rx_java2_version"
     compile "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+    compile "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
 
     compile "com.tbruyelle.rxpermissions2:rxpermissions:$rx_permission"
     compile "com.jakewharton.rxbinding2:rxbinding:$rx_binding"
@@ -123,7 +118,7 @@ dependencies {
 
     // Dart
     compile "com.f2prateek.dart:dart:$dart_version"
-    provided "com.f2prateek.dart:dart-processor:$dart_version"
+    kapt "com.f2prateek.dart:dart-processor:$dart_version"
 
     // Timber
     compile "com.jakewharton.timber:timber:$timber_version"

@@ -3,7 +3,7 @@ package com.cabbage.scaffold.dagger
 import dagger.Component
 
 @ConfigPersistent
-@Component(dependencies = arrayOf(AppComponent::class))
+@Component(dependencies = [(AppComponent::class)])
 interface ConfigPersistentComponent {
 
     fun activityComponent(activityModule: ActivityModule): ActivityComponent

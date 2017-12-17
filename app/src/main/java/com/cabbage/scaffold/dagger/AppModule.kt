@@ -9,7 +9,7 @@ import dagger.Provides
 import javax.inject.Named
 
 @Module
-class AppModule(val context: Context) {
+class AppModule(private val context: Context) {
 
     @ApplicationScope @Provides
     @Named("appContext")

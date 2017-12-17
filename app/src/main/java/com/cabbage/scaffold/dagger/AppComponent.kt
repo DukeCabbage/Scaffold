@@ -6,7 +6,7 @@ import dagger.Component
 import javax.inject.Named
 
 @ApplicationScope
-@Component(modules = arrayOf(AppModule::class))
+@Component(modules = [(AppModule::class)])
 interface AppComponent {
 
     @Named("appContext")

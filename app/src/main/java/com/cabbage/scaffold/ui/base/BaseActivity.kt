@@ -28,16 +28,17 @@ abstract class BaseActivity : AppCompatActivity() {
         // Create the ActivityComponent and reuses cached ConfigPersistentComponent if this is
         // being called after a configuration change.
         mActivityId = savedInstanceState?.getLong(KEY_ACTIVITY_ID) ?: NextId.getAndIncrement()
+        mActivityId!!.let {
+            val configPersistentComponent = ComponentMap[it]
+                                            ?: DaggerConfigPersistentComponent.builder()
+                                                    .appComponent(ScaffoldApplication.appComponent)
+                                                    .build()
 
-        val configPersistentComponent = ComponentMap[mActivityId!!] ?: DaggerConfigPersistentComponent.builder()
-                .appComponent(ScaffoldApplication.appComponent)
-                .build()
-
-        if (!ComponentMap.containsKey(mActivityId!!)) {
-            ComponentMap.put(mActivityId!!, configPersistentComponent)
+            if (!ComponentMap.containsKey(it)) {
+                ComponentMap.put(it, configPersistentComponent)
+            }
+            activityComponent = configPersistentComponent.activityComponent(ActivityModule(this))
         }
-
-        activityComponent = configPersistentComponent.activityComponent(ActivityModule(this))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

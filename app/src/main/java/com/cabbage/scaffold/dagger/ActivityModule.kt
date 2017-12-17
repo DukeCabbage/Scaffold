@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ActivityModule(val activity: AppCompatActivity) {
+class ActivityModule(private val activity: AppCompatActivity) {
 
     @ActivityScope @Provides
     fun providesRxPermission(): RxPermissions {
