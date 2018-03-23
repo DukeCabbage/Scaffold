@@ -8,7 +8,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @ConfigPersistent
-class MainPresenter @Inject constructor() : MainContract.Presenter() {
+class MainPresenter @Inject constructor()
+    : MainContract.Presenter() {
+
     init {
         Timber.v("Initializing")
     }
@@ -16,10 +18,11 @@ class MainPresenter @Inject constructor() : MainContract.Presenter() {
     override fun ensureLocationPermission(rxPermissions: RxPermissions) {
 
         val locationPermission = Manifest.permission.ACCESS_FINE_LOCATION
-        addSubscription(rxPermissions.request(locationPermission)
-                                .subscribeBy(
-                                        onNext = { mvpView?.showLocationPermissionResult(it) },
-                                        onError = { e -> Timber.e(e) }
-                                ))
+        val disposable = rxPermissions.request(locationPermission)
+                .subscribeBy(
+                        onNext = { mvpView?.showLocationPermissionResult(it) },
+                        onError = { e -> Timber.e(e) }
+                )
+        addSubscription(disposable)
     }
 }
