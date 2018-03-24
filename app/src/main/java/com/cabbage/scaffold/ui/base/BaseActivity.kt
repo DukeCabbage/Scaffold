@@ -3,10 +3,10 @@ package com.cabbage.scaffold.ui.base
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.cabbage.scaffold.ScaffoldApplication
-import com.cabbage.scaffold.dagger.ActivityComponent
-import com.cabbage.scaffold.dagger.ActivityModule
-import com.cabbage.scaffold.dagger.ConfigPersistentComponent
-import com.cabbage.scaffold.dagger.DaggerConfigPersistentComponent
+import com.cabbage.scaffold.dagger.activity.ActivityComponent
+import com.cabbage.scaffold.dagger.activity.ActivityModule
+import com.cabbage.scaffold.dagger.activity.ConfigPersistentComponent
+import com.cabbage.scaffold.dagger.activity.DaggerConfigPersistentComponent
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicLong
 
@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicLong
 abstract class BaseActivity : AppCompatActivity() {
 
     companion object {
-        private val KEY_ACTIVITY_ID = "ACTIVITY_ID"
+        private const val KEY_ACTIVITY_ID = "ACTIVITY_ID"
         private val NextId = AtomicLong(0)
         private val ComponentMap: MutableMap<Long, ConfigPersistentComponent> = HashMap()
     }
@@ -35,7 +35,7 @@ abstract class BaseActivity : AppCompatActivity() {
                                                     .build()
 
             if (!ComponentMap.containsKey(it)) {
-                ComponentMap.put(it, configPersistentComponent)
+                ComponentMap[it] = configPersistentComponent
             }
             activityComponent = configPersistentComponent.activityComponent(ActivityModule(this))
         }

@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainContract.View {
 
-    @Inject lateinit var presenter: MainPresenter
+    @Inject lateinit var presenter: MainContract.Presenter
     @Inject lateinit var rxPermission: RxPermissions
 
     private var clickSubscription: Disposable? = null
@@ -38,7 +38,7 @@ class MainActivity : BaseActivity(), MainContract.View {
     public override fun onStart() {
         super.onStart()
         Timber.v("onStart")
-        presenter.mvpView = this
+        presenter.attachView(this)
         presenter.ensureLocationPermission(rxPermission)
 
         clickSubscription = RxView.clicks(fab).subscribeBy(onNext = { presenter.ensureLocationPermission(rxPermission) })
@@ -48,7 +48,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         super.onStop()
         Timber.v("onStop")
         clickSubscription?.dispose()
-        presenter.mvpView = null
+        presenter.detachView()
     }
 
     override fun onDestroy() {

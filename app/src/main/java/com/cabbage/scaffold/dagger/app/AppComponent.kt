@@ -1,6 +1,7 @@
-package com.cabbage.scaffold.dagger
+package com.cabbage.scaffold.dagger.app
 
 import android.content.Context
+import com.cabbage.scaffold.dagger.ApplicationScope
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import dagger.Component
 import javax.inject.Named

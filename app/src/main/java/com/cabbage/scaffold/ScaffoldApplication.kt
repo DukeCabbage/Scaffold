@@ -1,9 +1,9 @@
 package com.cabbage.scaffold
 
 import android.app.Application
-import com.cabbage.scaffold.dagger.AppComponent
-import com.cabbage.scaffold.dagger.AppModule
-import com.cabbage.scaffold.dagger.DaggerAppComponent
+import com.cabbage.scaffold.dagger.app.AppComponent
+import com.cabbage.scaffold.dagger.app.AppModule
+import com.cabbage.scaffold.dagger.app.DaggerAppComponent
 
 import timber.log.Timber
 
