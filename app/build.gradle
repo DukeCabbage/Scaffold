@@ -85,41 +85,41 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    compile "com.android.support:appcompat-v7:$support_library_version"
-    compile "com.android.support:recyclerview-v7:$support_library_version"
-    compile "com.android.support:cardview-v7:$support_library_version"
-    compile "com.android.support:design:$support_library_version"
+    implementation "com.android.support:appcompat-v7:$support_library_version"
+    implementation "com.android.support:recyclerview-v7:$support_library_version"
+    implementation "com.android.support:cardview-v7:$support_library_version"
+    implementation "com.android.support:design:$support_library_version"
 
     // ReactiveX
-    compile "io.reactivex.rxjava2:rxjava:$rx_java2_version"
-    compile "io.reactivex.rxjava2:rxandroid:$rx_android_version"
-    compile "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rx_java2_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
 
-    compile "com.tbruyelle.rxpermissions2:rxpermissions:$rx_permission"
-    compile "com.jakewharton.rxbinding2:rxbinding:$rx_binding"
-    compile "com.f2prateek.rx.preferences2:rx-preferences:$rx_preferences"
+    implementation "com.tbruyelle.rxpermissions2:rxpermissions:$rx_permission"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rx_binding"
+    implementation "com.f2prateek.rx.preferences2:rx-preferences:$rx_preferences"
 
     // Dagger 2
-    compile "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     // Butter Knife
-    compile "com.jakewharton:butterknife:$butter_knife_version"
+    implementation "com.jakewharton:butterknife:$butter_knife_version"
     kapt "com.jakewharton:butterknife-compiler:$butter_knife_version"
 
     // Dart
-    compile "com.f2prateek.dart:dart:$dart_version"
+    implementation "com.f2prateek.dart:dart:$dart_version"
     kapt "com.f2prateek.dart:dart-processor:$dart_version"
 
     // Timber
-    compile "com.jakewharton.timber:timber:$timber_version"
+    implementation "com.jakewharton.timber:timber:$timber_version"
 
-    testCompile 'junit:junit:4.12'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 }
