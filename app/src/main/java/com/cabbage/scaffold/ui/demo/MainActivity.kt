@@ -1,5 +1,6 @@
 package com.cabbage.scaffold.ui.demo
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import butterknife.ButterKnife
@@ -41,7 +42,14 @@ class MainActivity : BaseActivity(), MainContract.View {
         presenter.attachView(this)
         presenter.ensureLocationPermission(rxPermission)
 
-        clickSubscription = RxView.clicks(fab).subscribeBy(onNext = { presenter.ensureLocationPermission(rxPermission) })
+        clickSubscription = RxView.clicks(fab).subscribeBy(
+                onNext = {
+                    val intent = Intent(this@MainActivity, NextActivity::class.java)
+                    intent.putExtra("MEOW", "Here's the message")
+                    startActivity(intent)
+//                    presenter.ensureLocationPermission(rxPermission)
+                }
+        )
     }
 
     public override fun onStop() {
