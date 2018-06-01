@@ -1,11 +1,13 @@
 package com.cabbage.scaffold.ui.demo
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import butterknife.ButterKnife
 import com.cabbage.scaffold.BuildConfig
 import com.cabbage.scaffold.R
+import com.cabbage.scaffold.showAlertDialog
 import com.cabbage.scaffold.ui.base.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -22,6 +24,8 @@ class MainActivity : BaseActivity(), MainContract.View {
     @Inject lateinit var rxPermission: RxPermissions
 
     private var clickSubscription: Disposable? = null
+
+    private var dialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,19 +46,29 @@ class MainActivity : BaseActivity(), MainContract.View {
         presenter.attachView(this)
         presenter.ensureLocationPermission(rxPermission)
 
-        clickSubscription = RxView.clicks(fab).subscribeBy(
-                onNext = {
-                    val intent = Intent(this@MainActivity, NextActivity::class.java)
-                    intent.putExtra("MEOW", "Here's the message")
-                    startActivity(intent)
-//                    presenter.ensureLocationPermission(rxPermission)
-                }
-        )
+        val clickCallback = { _: Any? ->
+            dialog = this.showAlertDialog(
+                    onPositive = {
+                        val intent = Intent(this@MainActivity, NextActivity::class.java)
+                        intent.putExtra("MEOW", "Here's the message")
+                        startActivity(intent)
+
+//                        presenter.ensureLocationPermission(rxPermission)
+                    },
+//                    onNegative = {
+//                        this@MainActivity.toast("Canceled")
+//                    },
+                    cancelable = false
+            )
+        }
+
+        clickSubscription = RxView.clicks(fab).subscribeBy(onNext = clickCallback)
     }
 
     public override fun onStop() {
         super.onStop()
         Timber.v("onStop")
+        dialog?.dismiss()
         clickSubscription?.dispose()
         presenter.detachView()
     }
