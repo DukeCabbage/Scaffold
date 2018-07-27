@@ -3,6 +3,7 @@ package com.cabbage.scaffold
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.res.Configuration
 import android.graphics.Point
 import android.support.v4.app.Fragment
@@ -68,3 +69,15 @@ fun Activity.showAlertDialog(onPositive: () -> Unit = {},
 
     return builder.show()
 }
+
+//region Dynamic themes
+fun Context.shouldUseAltTheme(): Boolean =
+        this.getSharedPreferences("default", MODE_PRIVATE)
+                .getBoolean("use_alt_theme", false)
+
+fun Context.toggleAltTheme(use: Boolean) = apply {
+    this.getSharedPreferences("default", MODE_PRIVATE).edit()
+            .putBoolean("use_alt_theme", use)
+            .apply()
+}
+//endregion

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorIndigo500">#3F51B5</color>
+    <color name="colorIndigo700">#303F9F</color>
+    <color name="colorPinkA200">#FF4081</color>
+
+    <color name="colorBlue500">#2196F3</color>
+    <color name="colorBlue700">#1976D2</color>
+
+    <color name="colorAmber500">#FFC107</color>
+    <color name="colorAmber700">#FFA000</color>
+
+    <color name="colorAmberA200">#FFD740</color>
+
 </resources>

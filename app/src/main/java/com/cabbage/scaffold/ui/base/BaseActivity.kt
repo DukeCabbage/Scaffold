@@ -10,7 +10,6 @@ import com.cabbage.scaffold.dagger.activity.DaggerConfigPersistentComponent
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicLong
 
-
 abstract class BaseActivity : AppCompatActivity() {
 
     companion object {
@@ -35,6 +34,7 @@ abstract class BaseActivity : AppCompatActivity() {
                                                     .build()
 
             if (!ComponentMap.containsKey(it)) {
+                Timber.d("Adding ConfigPersistentComponent id=$mActivityId")
                 ComponentMap[it] = configPersistentComponent
             }
             activityComponent = configPersistentComponent.activityComponent(ActivityModule(this))
@@ -49,7 +49,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         if (!isChangingConfigurations) {
-            Timber.i("Clearing ConfigPersistentComponent id=$mActivityId")
+            Timber.d("Clearing ConfigPersistentComponent id=$mActivityId")
             ComponentMap.remove(mActivityId)
         }
         super.onDestroy()
