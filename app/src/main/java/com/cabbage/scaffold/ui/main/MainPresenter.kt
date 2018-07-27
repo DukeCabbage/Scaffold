@@ -1,4 +1,4 @@
-package com.cabbage.scaffold.ui.demo
+package com.cabbage.scaffold.ui.main
 
 import android.Manifest
 import com.cabbage.scaffold.dagger.ConfigPersistent

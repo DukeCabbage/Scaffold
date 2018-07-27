@@ -1,4 +1,4 @@
-package com.cabbage.scaffold.ui.demo
+package com.cabbage.scaffold.ui.main
 
 import com.cabbage.scaffold.ui.base.MvpPresenter
 import com.cabbage.scaffold.ui.base.MvpView

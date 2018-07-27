@@ -2,11 +2,13 @@ package com.cabbage.scaffold.ui.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.cabbage.scaffold.R
 import com.cabbage.scaffold.ScaffoldApplication
 import com.cabbage.scaffold.dagger.activity.ActivityComponent
 import com.cabbage.scaffold.dagger.activity.ActivityModule
 import com.cabbage.scaffold.dagger.activity.ConfigPersistentComponent
 import com.cabbage.scaffold.dagger.activity.DaggerConfigPersistentComponent
+import com.cabbage.scaffold.shouldUseAltTheme
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicLong
 
@@ -38,6 +40,12 @@ abstract class BaseActivity : AppCompatActivity() {
                 ComponentMap[it] = configPersistentComponent
             }
             activityComponent = configPersistentComponent.activityComponent(ActivityModule(this))
+        }
+
+        if (shouldUseAltTheme()) {
+            setTheme(R.style.AltAppTheme_NoActionBar)
+        } else {
+            setTheme(R.style.AppTheme_NoActionBar)
         }
     }
 

@@ -1,7 +1,7 @@
 package com.cabbage.scaffold.dagger.activity
 
 import com.cabbage.scaffold.dagger.ActivityScope
-import com.cabbage.scaffold.ui.demo.MainActivity
+import com.cabbage.scaffold.ui.main.MainActivity
 import dagger.Subcomponent
 
 @ActivityScope

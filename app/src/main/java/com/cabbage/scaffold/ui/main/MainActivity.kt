@@ -1,8 +1,8 @@
-package com.cabbage.scaffold.ui.demo
+package com.cabbage.scaffold.ui.main
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.widget.TextView
@@ -15,6 +15,7 @@ import com.cabbage.scaffold.R
 import com.cabbage.scaffold.shouldUseAltTheme
 import com.cabbage.scaffold.toggleAltTheme
 import com.cabbage.scaffold.ui.base.BaseActivity
+import com.cabbage.scaffold.ui.gallery.ViewImageActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
@@ -26,7 +27,11 @@ class MainActivity : BaseActivity(), MainContract.View {
     @BindView(R.id.tvVersionName) lateinit var tvVersionName: TextView
     @BindView(R.id.tvVersionCode) lateinit var tvVersionCode: TextView
 
-    @BindView(R.id.fab) lateinit var fab: FloatingActionButton
+    @OnClick(R.id.fab)
+    fun fabOnClick() {
+        Intent(this, ViewImageActivity::class.java)
+                .also { startActivity(it) }
+    }
 
     @OnClick(R.id.fab_theme_1)
     fun theme1OnClick() {
@@ -54,17 +59,11 @@ class MainActivity : BaseActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.v("onCreate")
-        if (shouldUseAltTheme()) {
-            setTheme(R.style.AltAppTheme_NoActionBar)
-        } else {
-            setTheme(R.style.AppTheme_NoActionBar)
-        }
-
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
         setSupportActionBar(toolbar)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         activityComponent.inject(this)
 
@@ -78,15 +77,6 @@ class MainActivity : BaseActivity(), MainContract.View {
 
         presenter.attachView(this)
         presenter.ensureLocationPermission(rxPermission)
-
-        val list = arrayListOf("one", "two", "three", "four")
-        val iterator = list.iterator()
-
-        while (iterator.hasNext()) {
-            if (iterator.next() == "two") iterator.remove()
-        }
-
-        list.forEach { Timber.d(it); }
     }
 
     public override fun onStop() {
@@ -107,8 +97,7 @@ class MainActivity : BaseActivity(), MainContract.View {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 }

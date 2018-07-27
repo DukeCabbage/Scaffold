@@ -22,10 +22,12 @@ buildscript {
 
     ext.retrofit2_version = "2.3.0"
     ext.okhttp3_version = "3.8.1"
-    ext.timber_version = "4.5.+"
+    ext.timber_version = "4.7.0"
 
     ext.butter_knife_version = "8.8.1"
     ext.dart_version = "2.0.+"
+
+    ext.glide_version = "4.7.1"
 
     repositories {
         google()
