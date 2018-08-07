@@ -31,6 +31,11 @@ class MainActivity : BaseActivity(), MainContract.View {
     fun fabOnClick() {
         Intent(this, ViewImageActivity::class.java)
                 .also { startActivity(it) }
+
+
+
+//        val intent = intent
+//        val k = 6
     }
 
     @OnClick(R.id.fab_theme_1)
@@ -77,6 +82,11 @@ class MainActivity : BaseActivity(), MainContract.View {
 
         presenter.attachView(this)
         presenter.ensureLocationPermission(rxPermission)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
     }
 
     public override fun onStop() {

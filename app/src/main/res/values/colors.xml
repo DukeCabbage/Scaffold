@@ -12,4 +12,9 @@
 
     <color name="colorAmberA200">#FFD740</color>
 
+    <color name="colorGrey100">#F5F5F5</color>
+    <color name="colorBrown200">#BCAAA4</color>
+
+    <color name="debug_overlay">#14FF4081</color>
+
 </resources>
