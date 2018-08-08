@@ -1,13 +1,21 @@
 package com.cabbage.scaffold.ui.main
 
 import android.os.Bundle
+import android.support.design.chip.ChipGroup
+import android.widget.TextView
+import butterknife.BindView
 import butterknife.ButterKnife
 import com.cabbage.scaffold.R
 import com.cabbage.scaffold.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_next.*
 import timber.log.Timber
 
 class NextActivity : BaseActivity() {
+
+    @BindView(R.id.tvBundleData)
+    lateinit var tvBundleData: TextView
+
+    @BindView(R.id.chip_group)
+    lateinit var chipGroup: ChipGroup
 
     lateinit var data: String
 
@@ -21,5 +29,9 @@ class NextActivity : BaseActivity() {
         data = intent?.getStringExtra("MEOW") ?: "default"
 
         tvBundleData.text = data
+
+        chipGroup.setOnCheckedChangeListener { chipGroup, i ->
+            Timber.d("On check $i")
+        }
     }
 }

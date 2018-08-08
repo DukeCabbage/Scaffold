@@ -29,7 +29,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        Intent(this, ViewImageActivity::class.java)
+        Intent(this, NextActivity::class.java)
                 .also { startActivity(it) }
 
 
