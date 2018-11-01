@@ -1,5 +1,6 @@
 package com.cabbage.scaffold.dagger.app
 
+import android.app.Application
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
@@ -10,16 +11,16 @@ import dagger.Provides
 import javax.inject.Named
 
 @Module
-class AppModule(private val context: Context) {
+class AppModule {
 
     @ApplicationScope @Provides
     @Named("appContext")
-    fun providesContext(): Context {
-        return context
+    fun provideContext(application: Application): Context {
+        return application
     }
 
     @ApplicationScope @Provides
-    fun providesPreference(): SharedPreferences {
+    fun providesPreference(@Named("appContext") context: Context): SharedPreferences {
         return context.getSharedPreferences("default", MODE_PRIVATE)
     }
 

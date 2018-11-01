@@ -1,24 +1,30 @@
 package com.cabbage.scaffold
 
+import android.app.Activity
 import android.app.Application
-import com.cabbage.scaffold.dagger.app.AppComponent
-import com.cabbage.scaffold.dagger.app.AppModule
 import com.cabbage.scaffold.dagger.app.DaggerAppComponent
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 
 import timber.log.Timber
+import javax.inject.Inject
 
-class ScaffoldApplication : Application() {
+class ScaffoldApplication : Application(),
+        HasActivityInjector {
 
-    companion object {
-        lateinit var appComponent: AppComponent
-    }
+    @Inject
+    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+
+    override fun activityInjector() = activityInjector
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(ForestFire())
 
-        appComponent = DaggerAppComponent.builder()
-                .appModule(AppModule(this))
+        val component = DaggerAppComponent.builder()
+                .application(this)
                 .build()
+
+        component.inject(this)
     }
 }

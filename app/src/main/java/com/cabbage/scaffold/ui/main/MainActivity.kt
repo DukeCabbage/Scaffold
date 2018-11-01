@@ -1,5 +1,6 @@
 package com.cabbage.scaffold.ui.main
 
+import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -15,13 +16,14 @@ import com.cabbage.scaffold.R
 import com.cabbage.scaffold.shouldUseAltTheme
 import com.cabbage.scaffold.toggleAltTheme
 import com.cabbage.scaffold.ui.base.BaseActivity
-import com.cabbage.scaffold.ui.gallery.ViewImageActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
+import dagger.android.AndroidInjection
 import io.reactivex.disposables.Disposable
+import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainContract.View {
+class MainActivity : BaseActivity() {
 
     @BindView(R.id.toolbar) lateinit var toolbar: Toolbar
     @BindView(R.id.tvVersionName) lateinit var tvVersionName: TextView
@@ -31,11 +33,6 @@ class MainActivity : BaseActivity(), MainContract.View {
     fun fabOnClick() {
         Intent(this, NextActivity::class.java)
                 .also { startActivity(it) }
-
-
-
-//        val intent = intent
-//        val k = 6
     }
 
     @OnClick(R.id.fab_theme_1)
@@ -54,23 +51,20 @@ class MainActivity : BaseActivity(), MainContract.View {
         }
     }
 
-    @Inject lateinit var presenter: MainContract.Presenter
     @Inject lateinit var rxPermission: RxPermissions
 
     private var clickSubscription: Disposable? = null
+    private var permissionSubscription: Disposable? = null
 
     private var dialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         Timber.v("onCreate")
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
         setSupportActionBar(toolbar)
-
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        activityComponent.inject(this)
 
         tvVersionName.text = BuildConfig.VERSION_NAME
         tvVersionCode.text = "${BuildConfig.VERSION_CODE}"
@@ -80,8 +74,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         super.onStart()
         Timber.v("onStart")
 
-        presenter.attachView(this)
-        presenter.ensureLocationPermission(rxPermission)
+        ensureLocationPermission(rxPermission)
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -94,7 +87,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         Timber.v("onStop")
         dialog?.dismiss()
         clickSubscription?.dispose()
-        presenter.detachView()
+        permissionSubscription?.dispose()
     }
 
     override fun onDestroy() {
@@ -102,12 +95,22 @@ class MainActivity : BaseActivity(), MainContract.View {
         Timber.v("onDestroy")
     }
 
-    override fun showLocationPermissionResult(granted: Boolean) {
-        Toast.makeText(this, "Granted: $granted", Toast.LENGTH_SHORT).show()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    private fun showLocationPermissionResult(granted: Boolean) {
+        Toast.makeText(this, "Granted: $granted", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun ensureLocationPermission(rxPermissions: RxPermissions) {
+
+        val locationPermission = Manifest.permission.ACCESS_FINE_LOCATION
+        permissionSubscription = rxPermissions.request(locationPermission)
+                .subscribeBy(
+                        onNext = { showLocationPermissionResult(it) },
+                        onError = { e -> Timber.e(e) }
+                )
     }
 }
