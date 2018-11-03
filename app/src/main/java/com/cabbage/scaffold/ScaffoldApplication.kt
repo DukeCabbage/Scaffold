@@ -2,7 +2,8 @@ package com.cabbage.scaffold
 
 import android.app.Activity
 import android.app.Application
-import com.cabbage.scaffold.dagger.app.DaggerAppComponent
+import com.cabbage.scaffold.dagger.AppComponent
+import com.cabbage.scaffold.dagger.DaggerAppComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 
@@ -11,6 +12,8 @@ import javax.inject.Inject
 
 class ScaffoldApplication : Application(),
         HasActivityInjector {
+
+    lateinit var component: AppComponent
 
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
@@ -21,7 +24,7 @@ class ScaffoldApplication : Application(),
         super.onCreate()
         Timber.plant(ForestFire())
 
-        val component = DaggerAppComponent.builder()
+        component = DaggerAppComponent.builder()
                 .application(this)
                 .build()
 

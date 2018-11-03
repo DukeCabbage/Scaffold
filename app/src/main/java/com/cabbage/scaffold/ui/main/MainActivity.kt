@@ -16,6 +16,7 @@ import com.cabbage.scaffold.R
 import com.cabbage.scaffold.shouldUseAltTheme
 import com.cabbage.scaffold.toggleAltTheme
 import com.cabbage.scaffold.ui.base.BaseActivity
+import com.cabbage.scaffold.ui.container.ContainerActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.android.AndroidInjection
 import io.reactivex.disposables.Disposable
@@ -31,7 +32,7 @@ class MainActivity : BaseActivity() {
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        Intent(this, NextActivity::class.java)
+        Intent(this, ContainerActivity::class.java)
                 .also { startActivity(it) }
     }
 
@@ -74,7 +75,7 @@ class MainActivity : BaseActivity() {
         super.onStart()
         Timber.v("onStart")
 
-        ensureLocationPermission(rxPermission)
+//        ensureLocationPermission(rxPermission)
     }
 
     override fun onNewIntent(intent: Intent?) {

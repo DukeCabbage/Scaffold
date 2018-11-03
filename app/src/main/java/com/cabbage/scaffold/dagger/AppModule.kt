@@ -1,10 +1,9 @@
-package com.cabbage.scaffold.dagger.app
+package com.cabbage.scaffold.dagger
 
 import android.app.Application
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.cabbage.scaffold.dagger.ApplicationScope
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import dagger.Module
 import dagger.Provides

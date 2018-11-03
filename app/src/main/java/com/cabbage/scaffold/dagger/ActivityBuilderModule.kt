@@ -1,7 +1,8 @@
-package com.cabbage.scaffold.dagger.app
+package com.cabbage.scaffold.dagger
 
 import dagger.android.ContributesAndroidInjector
-import com.cabbage.scaffold.dagger.ActivityScope
+import com.cabbage.scaffold.ui.container.ContainerActivity
+import com.cabbage.scaffold.ui.container.di.ContainerActivityModule
 import com.cabbage.scaffold.ui.main.MainActivity
 import com.cabbage.scaffold.ui.main.NextActivity
 import com.cabbage.scaffold.ui.main.di.MainActivityModule
@@ -18,4 +19,8 @@ abstract class ActivityBuilderModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [NextActivityModule::class])
     abstract fun contributeNextActivity(): NextActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [ContainerActivityModule::class])
+    abstract fun contributeContainerActivity(): ContainerActivity
 }

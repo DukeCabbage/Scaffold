@@ -1,9 +1,8 @@
-package com.cabbage.scaffold.dagger.app
+package com.cabbage.scaffold.dagger
 
 import android.app.Application
 import android.content.Context
 import com.cabbage.scaffold.ScaffoldApplication
-import com.cabbage.scaffold.dagger.ApplicationScope
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import dagger.BindsInstance
 import dagger.Component
