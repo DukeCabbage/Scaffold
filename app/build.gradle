@@ -10,14 +10,16 @@ android {
     def versionProps = getVersionProps()
     def versionNameDebugSuffix = getAppVersionNameDebugSuffix(versionProps)
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion androidCompileSdkVersion.toInteger()
+    buildToolsVersion androidBuildToolsVersion
 
 
     defaultConfig {
         applicationId "com.cabbage.scaffold"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+
         versionCode getAppVersionCode(versionProps)
         versionName getAppVersionName(versionProps)
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

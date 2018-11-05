@@ -1,5 +1,7 @@
 package com.cabbage.scaffold;
 
+import android.support.annotation.NonNull;
+
 import timber.log.Timber;
 
 /**
@@ -10,7 +12,7 @@ import timber.log.Timber;
 public final class ForestFire extends Timber.DebugTree {
 
     @Override
-    protected String createStackElementTag(StackTraceElement element) {
+    protected String createStackElementTag(@NonNull StackTraceElement element) {
         return super.createStackElementTag(element) + ':' + element.getLineNumber();
     }
 }

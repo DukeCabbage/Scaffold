@@ -8,10 +8,8 @@ import butterknife.ButterKnife
 import com.cabbage.scaffold.R
 import com.cabbage.scaffold.dagger.ActivityScope
 import com.cabbage.scaffold.ui.base.BaseActivity
-import com.cabbage.scaffold.ui.container.viewmodel.ContainerVMFactory
 import com.cabbage.scaffold.ui.container.viewmodel.ContainerViewModel
 import com.cabbage.scaffold.ui.daggerLazy
-import com.cabbage.scaffold.ui.getViewModel
 import dagger.android.AndroidInjection
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,9 +18,9 @@ class ContainerActivity : BaseActivity() {
 
     @BindView(R.id.toolbar) lateinit var toolbar: Toolbar
 
+    // This `lazy` is probably an overkill...
     @Inject @ActivityScope
-    lateinit var lazyVMFactory: daggerLazy<ContainerVMFactory>
-    private val viewModel by lazy { getViewModel<ContainerViewModel>(lazyVMFactory) }
+    lateinit var viewModel: daggerLazy<ContainerViewModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("onCreate")
@@ -37,7 +35,8 @@ class ContainerActivity : BaseActivity() {
     }
 
     override fun onResume() {
+        Timber.d("onResume")
         super.onResume()
-        viewModel.data.observe(this, Observer { Timber.i(it) })
+        viewModel.get().data.observe(this, Observer { Timber.i(it) })
     }
 }

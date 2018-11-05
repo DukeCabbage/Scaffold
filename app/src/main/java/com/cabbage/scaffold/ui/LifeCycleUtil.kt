@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.cabbage.scaffold.ui
 
 import android.arch.lifecycle.*
@@ -8,6 +10,9 @@ import timber.log.Timber
 typealias daggerLazy<T> = dagger.Lazy<T>
 typealias VMFac = ViewModelProvider.Factory
 
+/**
+ * Takes a lazy [ViewModelProvider.Factory], only unwraps it if view model wasn't created before.
+ */
 inline fun <reified T : ViewModel>
         FragmentActivity.getViewModel(lazyFactory: daggerLazy<out VMFac>): T =
         try {
