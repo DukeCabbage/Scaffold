@@ -38,7 +38,7 @@ class ContainerActivity : BaseActivity() {
     override fun onResume() {
         Timber.d("onResume")
         super.onResume()
-        viewModel.get().data.observe(this, Observer { Timber.i(it) })
+        viewModel.get().data.observe(this, Observer {  })
 
         val existing = supportFragmentManager.findFragmentById(R.id.frame) as? CounterFragment
         if (existing == null) {

@@ -5,6 +5,7 @@ import com.cabbage.scaffold.dagger.ActivityScope
 import com.cabbage.scaffold.dagger.ApplicationScope
 import com.cabbage.scaffold.ui.container.view.ContainerActivity
 import com.cabbage.scaffold.ui.container.domain.AANetworkManager
+import com.cabbage.scaffold.ui.container.domain.Counter
 import com.cabbage.scaffold.ui.container.viewmodel.ContainerVMFactory
 import com.cabbage.scaffold.ui.container.viewmodel.ContainerViewModel
 import com.cabbage.scaffold.ui.daggerLazy
@@ -30,11 +31,17 @@ object ContainerVMModule {
     }
 
     @Provides @ActivityScope @JvmStatic
-    fun provideVMFactory(@ActivityScope manager: AANetworkManager) =
-            ContainerVMFactory(manager)
+    fun provideVMFactory(@ActivityScope manager: AANetworkManager,
+                         @Named("Global") globalCounter: Counter,
+                         @Named("Local") localCounter: Counter) =
+            ContainerVMFactory(manager, globalCounter, localCounter)
 
     @Provides @ActivityScope @JvmStatic
-    fun provideNetworkManager(@ApplicationScope @Named("appContext")
-                              context: Context) =
+    fun provideNetworkManager(@ApplicationScope @Named("appContext") context: Context) =
             AANetworkManager(context)
+
+    @Provides @ActivityScope @JvmStatic
+    @Named("Local")
+    fun providesGlobalCounter(@ApplicationScope @Named("appContext") context: Context) =
+            Counter(context, "local")
 }
