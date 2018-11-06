@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey50"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    tools:ignore="ContentDescription">
+
+    <ImageButton
+        android:id="@+id/btn_inc_global"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:backgroundTint="@color/colorGrey100"
+        app:srcCompat="@drawable/ic_add_black_24dp"
+        app:tint="@color/colorAmber500" />
+
+    <ImageButton
+        android:id="@+id/btn_dec_global"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:backgroundTint="@color/colorGrey100"
+        app:srcCompat="@drawable/ic_remove_black_24dp"
+        app:tint="@color/colorAmber500" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5" />
+
+    <ImageButton
+        android:id="@+id/btn_inc_local"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:backgroundTint="@color/colorGrey100"
+        app:srcCompat="@drawable/ic_add_black_24dp"
+        app:tint="@color/colorIndigo500" />
+
+    <ImageButton
+        android:id="@+id/btn_dec_local"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:backgroundTint="@color/colorGrey100"
+        app:srcCompat="@drawable/ic_remove_black_24dp"
+        app:tint="@color/colorIndigo500" />
+
+</LinearLayout>

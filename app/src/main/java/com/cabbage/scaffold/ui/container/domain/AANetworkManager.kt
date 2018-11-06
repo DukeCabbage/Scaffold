@@ -1,6 +1,7 @@
 package com.cabbage.scaffold.ui.container.domain
 
 import android.app.Application
+import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import timber.log.Timber
 
@@ -9,6 +10,8 @@ import timber.log.Timber
  */
 class AANetworkManager
 constructor(private val context: Context) {
+
+    val count = MutableLiveData<Int>().apply { value = 0 }
 
     init {
         Timber.i("init")

@@ -1,4 +1,4 @@
-package com.cabbage.scaffold
+package com.cabbage.scaffold.ui
 
 import android.app.Activity
 import android.app.AlertDialog

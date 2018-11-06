@@ -11,7 +11,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
-import com.cabbage.scaffold.Post
 import com.cabbage.scaffold.R
 import com.cabbage.scaffold.image.GlideApp
 import com.cabbage.scaffold.ui.base.BaseActivity

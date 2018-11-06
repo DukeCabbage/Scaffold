@@ -3,7 +3,7 @@ package com.cabbage.scaffold.ui.container.di
 import android.content.Context
 import com.cabbage.scaffold.dagger.ActivityScope
 import com.cabbage.scaffold.dagger.ApplicationScope
-import com.cabbage.scaffold.ui.container.ContainerActivity
+import com.cabbage.scaffold.ui.container.view.ContainerActivity
 import com.cabbage.scaffold.ui.container.domain.AANetworkManager
 import com.cabbage.scaffold.ui.container.viewmodel.ContainerVMFactory
 import com.cabbage.scaffold.ui.container.viewmodel.ContainerViewModel

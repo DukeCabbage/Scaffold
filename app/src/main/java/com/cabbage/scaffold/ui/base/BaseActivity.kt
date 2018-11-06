@@ -3,7 +3,7 @@ package com.cabbage.scaffold.ui.base
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.cabbage.scaffold.R
-import com.cabbage.scaffold.shouldUseAltTheme
+import com.cabbage.scaffold.ui.shouldUseAltTheme
 
 abstract class BaseActivity : AppCompatActivity() {
 

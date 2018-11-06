@@ -1,8 +1,9 @@
-package com.cabbage.scaffold.ui.container
+package com.cabbage.scaffold.ui.container.view
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import android.widget.FrameLayout
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.cabbage.scaffold.R
@@ -17,10 +18,10 @@ import javax.inject.Inject
 class ContainerActivity : BaseActivity() {
 
     @BindView(R.id.toolbar) lateinit var toolbar: Toolbar
+    @BindView(R.id.frame) lateinit var frame: FrameLayout
 
     // This `lazy` is probably an overkill...
-    @Inject @ActivityScope
-    lateinit var viewModel: daggerLazy<ContainerViewModel>
+    @Inject @ActivityScope lateinit var viewModel: daggerLazy<ContainerViewModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("onCreate")
@@ -38,5 +39,12 @@ class ContainerActivity : BaseActivity() {
         Timber.d("onResume")
         super.onResume()
         viewModel.get().data.observe(this, Observer { Timber.i(it) })
+
+        val existing = supportFragmentManager.findFragmentById(R.id.frame) as? CounterFragment
+        if (existing == null) {
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.frame, CounterFragment.newInstance(), "counter")
+                    .commit()
+        }
     }
 }

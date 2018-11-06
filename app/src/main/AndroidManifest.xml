@@ -38,7 +38,7 @@
         <activity android:name=".ui.main.NextActivity" />
 
         <activity
-            android:name=".ui.container.ContainerActivity"
+            android:name=".ui.container.view.ContainerActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 

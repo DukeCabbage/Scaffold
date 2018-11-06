@@ -13,10 +13,10 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import com.cabbage.scaffold.BuildConfig
 import com.cabbage.scaffold.R
-import com.cabbage.scaffold.shouldUseAltTheme
-import com.cabbage.scaffold.toggleAltTheme
+import com.cabbage.scaffold.ui.shouldUseAltTheme
+import com.cabbage.scaffold.ui.toggleAltTheme
 import com.cabbage.scaffold.ui.base.BaseActivity
-import com.cabbage.scaffold.ui.container.ContainerActivity
+import com.cabbage.scaffold.ui.container.view.ContainerActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.android.AndroidInjection
 import io.reactivex.disposables.Disposable

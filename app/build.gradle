@@ -23,6 +23,9 @@ android {
         versionCode getAppVersionCode(versionProps)
         versionName getAppVersionName(versionProps)
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     File propsFile = rootProject.file("keystore.properties")

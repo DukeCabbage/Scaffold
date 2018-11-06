@@ -1,7 +1,7 @@
 package com.cabbage.scaffold.dagger
 
 import dagger.android.ContributesAndroidInjector
-import com.cabbage.scaffold.ui.container.ContainerActivity
+import com.cabbage.scaffold.ui.container.view.ContainerActivity
 import com.cabbage.scaffold.ui.container.di.ContainerActivityModule
 import com.cabbage.scaffold.ui.container.di.ContainerVMModule
 import com.cabbage.scaffold.ui.main.MainActivity

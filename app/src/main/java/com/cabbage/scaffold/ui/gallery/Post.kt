@@ -1,4 +1,4 @@
-package com.cabbage.scaffold
+package com.cabbage.scaffold.ui.gallery
 
 
 private const val fullUrl = "https://firebasestorage.googleapis.com/" +
