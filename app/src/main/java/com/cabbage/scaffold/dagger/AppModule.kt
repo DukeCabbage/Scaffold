@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.cabbage.scaffold.ui.container.domain.Counter
+import com.cabbage.scaffold.ui.counter.domain.Counter
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import dagger.Module
 import dagger.Provides

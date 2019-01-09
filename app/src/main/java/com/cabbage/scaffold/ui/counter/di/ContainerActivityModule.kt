@@ -1,9 +1,9 @@
-package com.cabbage.scaffold.ui.container.di
+package com.cabbage.scaffold.ui.counter.di
 
 import android.app.Activity
 import com.cabbage.scaffold.dagger.ActivityScope
 import com.cabbage.scaffold.dagger.RxPermissionModule
-import com.cabbage.scaffold.ui.container.view.ContainerActivity
+import com.cabbage.scaffold.ui.counter.view.CounterActivity
 import dagger.Binds
 import dagger.Module
 
@@ -14,5 +14,5 @@ import dagger.Module
 abstract class ContainerActivityModule {
 
     @Binds @ActivityScope
-    abstract fun bindsActivity(act: ContainerActivity): Activity
+    abstract fun bindsActivity(act: CounterActivity): Activity
 }

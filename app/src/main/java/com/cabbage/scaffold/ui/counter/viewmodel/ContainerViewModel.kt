@@ -1,11 +1,11 @@
-package com.cabbage.scaffold.ui.container.viewmodel
+package com.cabbage.scaffold.ui.counter.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.cabbage.scaffold.ui.container.domain.AANetworkManager
-import com.cabbage.scaffold.ui.container.domain.Counter
+import com.cabbage.scaffold.ui.counter.domain.AANetworkManager
+import com.cabbage.scaffold.ui.counter.domain.Counter
 import timber.log.Timber
 
 class ContainerViewModel

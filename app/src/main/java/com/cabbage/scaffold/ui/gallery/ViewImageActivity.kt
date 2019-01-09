@@ -2,9 +2,6 @@ package com.cabbage.scaffold.ui.gallery
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.widget.ImageView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -14,20 +11,15 @@ import com.bumptech.glide.request.transition.Transition
 import com.cabbage.scaffold.R
 import com.cabbage.scaffold.image.GlideApp
 import com.cabbage.scaffold.ui.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_view_image.*
 
 class ViewImageActivity : BaseActivity() {
-
-    @BindView(R.id.iv1)
-    lateinit var ivFirst: ImageView
 
     private var circlePlaceholder: Drawable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_image)
-        ButterKnife.bind(this)
-
-        val intent = intent
 
         GlideApp.with(this)
                 .load(R.drawable.placeholder_square)
@@ -61,7 +53,7 @@ class ViewImageActivity : BaseActivity() {
                 .placeholder(circlePlaceholder)
                 .circleCrop()
                 .listener(glideRequestListener)
-                .into(ivFirst)
+                .into(iv1)
     }
 
     private fun loadGif() {
@@ -76,7 +68,7 @@ class ViewImageActivity : BaseActivity() {
                 .placeholder(circlePlaceholder)
                 .circleCrop()
                 .listener(glideRequestListener)
-                .into(ivFirst)
+                .into(iv1)
     }
 
     private val glideRequestListener = object : RequestListener<Drawable> {

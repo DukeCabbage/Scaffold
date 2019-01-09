@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.container.view.ContainerActivity">
+    tools:context=".ui.counter.view.CounterActivity">
 
     <FrameLayout
         android:id="@+id/frame"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/frag_selected_filter"
-        android:name="com.cabbage.scaffold.ui.container.view.ControlPanelFragment"
+        android:name="com.cabbage.scaffold.ui.counter.view.ControlPanelFragment"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_gravity="bottom" />

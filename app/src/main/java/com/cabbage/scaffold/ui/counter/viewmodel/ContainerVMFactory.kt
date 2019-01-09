@@ -1,9 +1,9 @@
-package com.cabbage.scaffold.ui.container.viewmodel
+package com.cabbage.scaffold.ui.counter.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.cabbage.scaffold.ui.container.domain.AANetworkManager
-import com.cabbage.scaffold.ui.container.domain.Counter
+import com.cabbage.scaffold.ui.counter.domain.AANetworkManager
+import com.cabbage.scaffold.ui.counter.domain.Counter
 import timber.log.Timber
 
 class ContainerVMFactory

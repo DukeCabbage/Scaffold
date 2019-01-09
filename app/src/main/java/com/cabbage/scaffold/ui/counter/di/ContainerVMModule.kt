@@ -1,13 +1,13 @@
-package com.cabbage.scaffold.ui.container.di
+package com.cabbage.scaffold.ui.counter.di
 
 import android.content.Context
 import com.cabbage.scaffold.dagger.ActivityScope
 import com.cabbage.scaffold.dagger.ApplicationScope
-import com.cabbage.scaffold.ui.container.view.ContainerActivity
-import com.cabbage.scaffold.ui.container.domain.AANetworkManager
-import com.cabbage.scaffold.ui.container.domain.Counter
-import com.cabbage.scaffold.ui.container.viewmodel.ContainerVMFactory
-import com.cabbage.scaffold.ui.container.viewmodel.ContainerViewModel
+import com.cabbage.scaffold.ui.counter.view.CounterActivity
+import com.cabbage.scaffold.ui.counter.domain.AANetworkManager
+import com.cabbage.scaffold.ui.counter.domain.Counter
+import com.cabbage.scaffold.ui.counter.viewmodel.ContainerVMFactory
+import com.cabbage.scaffold.ui.counter.viewmodel.ContainerViewModel
 import com.cabbage.scaffold.ui.daggerLazy
 import com.cabbage.scaffold.ui.getViewModel
 import dagger.Module
@@ -26,7 +26,7 @@ object ContainerVMModule {
 
     @Provides @ActivityScope @JvmStatic
     fun provideViewModel(@ActivityScope lazyVMFac: daggerLazy<ContainerVMFactory>,
-                         @ActivityScope activity: ContainerActivity): ContainerViewModel {
+                         @ActivityScope activity: CounterActivity): ContainerViewModel {
         return activity.getViewModel(lazyVMFac)
     }
 

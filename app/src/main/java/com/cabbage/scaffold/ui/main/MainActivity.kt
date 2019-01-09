@@ -4,53 +4,25 @@ import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.view.Menu
-import android.widget.TextView
 import android.widget.Toast
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.cabbage.scaffold.BuildConfig
 import com.cabbage.scaffold.R
 import com.cabbage.scaffold.ui.shouldUseAltTheme
 import com.cabbage.scaffold.ui.toggleAltTheme
 import com.cabbage.scaffold.ui.base.BaseActivity
-import com.cabbage.scaffold.ui.container.view.ContainerActivity
+import com.cabbage.scaffold.ui.counter.view.CounterActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.android.AndroidInjection
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.include_app_bar.*
 import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
-
-    @BindView(R.id.toolbar) lateinit var toolbar: Toolbar
-    @BindView(R.id.tvVersionName) lateinit var tvVersionName: TextView
-    @BindView(R.id.tvVersionCode) lateinit var tvVersionCode: TextView
-
-    @OnClick(R.id.fab)
-    fun fabOnClick() {
-        Intent(this, ContainerActivity::class.java)
-                .also { startActivity(it) }
-    }
-
-    @OnClick(R.id.fab_theme_1)
-    fun theme1OnClick() {
-        if (shouldUseAltTheme()) {
-            toggleAltTheme(false)
-            recreate()
-        }
-    }
-
-    @OnClick(R.id.fab_theme_2)
-    fun theme2OnClick() {
-        if (!shouldUseAltTheme()) {
-            toggleAltTheme(true)
-            recreate()
-        }
-    }
 
     @Inject lateinit var rxPermission: RxPermissions
 
@@ -64,11 +36,29 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         Timber.v("onCreate")
         setContentView(R.layout.activity_main)
-        ButterKnife.bind(this)
         setSupportActionBar(toolbar)
 
         tvVersionName.text = BuildConfig.VERSION_NAME
         tvVersionCode.text = "${BuildConfig.VERSION_CODE}"
+
+        fab.setOnClickListener {
+            Intent(this, CounterActivity::class.java)
+                .also { intent -> startActivity(intent) }
+        }
+
+        fab_theme_1.setOnClickListener {
+            if (shouldUseAltTheme()) {
+                toggleAltTheme(false)
+                recreate()
+            }
+        }
+
+        fab_theme_2.setOnClickListener {
+            if (!shouldUseAltTheme()) {
+                toggleAltTheme(true)
+                recreate()
+            }
+        }
     }
 
     public override fun onStart() {

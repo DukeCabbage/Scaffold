@@ -120,8 +120,8 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
 
     // Butter Knife
-    implementation "com.jakewharton:butterknife:$butter_knife_version"
-    kapt "com.jakewharton:butterknife-compiler:$butter_knife_version"
+//    implementation "com.jakewharton:butterknife:$butter_knife_version"
+//    kapt "com.jakewharton:butterknife-compiler:$butter_knife_version"
 
     // Dart
 //    implementation "com.f2prateek.dart:dart:$dart_version"
