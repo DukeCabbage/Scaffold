@@ -109,7 +109,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
 
     implementation "com.tbruyelle.rxpermissions2:rxpermissions:$rx_permission"
-    implementation "com.jakewharton.rxbinding2:rxbinding:$rx_binding"
+//    implementation "com.jakewharton.rxbinding2:rxbinding:$rx_binding"
     implementation "com.f2prateek.rx.preferences2:rx-preferences:$rx_preferences"
 
     // Dagger 2
@@ -124,8 +124,8 @@ dependencies {
     kapt "com.jakewharton:butterknife-compiler:$butter_knife_version"
 
     // Dart
-    implementation "com.f2prateek.dart:dart:$dart_version"
-    kapt "com.f2prateek.dart:dart-processor:$dart_version"
+//    implementation "com.f2prateek.dart:dart:$dart_version"
+//    kapt "com.f2prateek.dart:dart-processor:$dart_version"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"

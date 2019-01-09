@@ -10,28 +10,18 @@ import com.cabbage.scaffold.ui.main.di.MainActivityModule
 import com.cabbage.scaffold.ui.main.di.NextActivityModule
 import dagger.Module
 
-@Suppress("unused")
 @Module
 abstract class ActivityBuilderModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [
-        MainActivityModule::class,
-        RxPermissionModule::class])
+    @ContributesAndroidInjector(modules = [MainActivityModule::class])
     abstract fun contributeMainActivity(): MainActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [
-        NextActivityModule::class,
-        RxPermissionModule::class
-    ])
+    @ContributesAndroidInjector(modules = [NextActivityModule::class])
     abstract fun contributeNextActivity(): NextActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [
-        ContainerActivityModule::class,
-        ContainerVMModule::class,
-        RxPermissionModule::class
-    ])
+    @ContributesAndroidInjector(modules = [ContainerActivityModule::class])
     abstract fun contributeContainerActivity(): ContainerActivity
 }
