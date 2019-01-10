@@ -3,7 +3,6 @@
 package com.cabbage.scaffold.ui
 
 import android.arch.lifecycle.*
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import timber.log.Timber
 
@@ -13,7 +12,7 @@ import timber.log.Timber
 
 typealias daggerLazy<T> = dagger.Lazy<T>
 
-typealias VMFac = ViewModelProvider.Factory
+typealias VMFactory = ViewModelProvider.Factory
 
 /**
  * Takes a lazy [ViewModelProvider.Factory], only unwraps it if view model wasn't created before.
@@ -21,39 +20,24 @@ typealias VMFac = ViewModelProvider.Factory
  * necessary for us to implement custom [ViewModelProvider.Factory]
  */
 inline fun <reified T : ViewModel>
-        FragmentActivity.getViewModel(lazyFactory: daggerLazy<out VMFac>): T =
+        FragmentActivity.getViewModel(lazyFactory: daggerLazy<out VMFactory>): T =
         try {
-            Timber.v("Provide VM cached")
-            getViewModel<T>(null)
+            Timber.d("Provide cached VM")
+            ViewModelProviders.of(this)[T::class.java]
         } catch (e: Throwable) {
-            Timber.v("Provide VM with factory")
-            getViewModel(lazyFactory.get())
+            Timber.d("Provide VM with factory")
+            ViewModelProviders.of(this, lazyFactory.get())[T::class.java]
         }
 
-/**
- * Get [ViewModel] of type [T], with optional [factory]
- */
-inline fun <reified T : ViewModel>
-        FragmentActivity.getViewModel(factory: VMFac? = null): T =
-        ViewModelProviders.of(this, factory)[T::class.java]
 
-
-// We need the view model associated with host activity, not fragment itself
-// Calling ViewModelProviders.of(this: Fragment) will result in a different instance
-/**
- * Get [ViewModel] of type [T] from the view model pool of the activity this fragment is attached to.
- * Returns null if activity is not attached yet.
- */
-inline fun <reified T : ViewModel>
-        Fragment.getViewModel(factory: VMFac? = null): T? =
-        activity?.run { getViewModel(factory) }
-
-/**
- * Fragment version of [getViewModel] with lazy factory. Returns null if activity is not attached yet.
- */
-inline fun <reified T : ViewModel>
-        Fragment.getViewModel(lazyFactory: daggerLazy<out VMFac>): T? =
-        activity?.run { getViewModel(lazyFactory) }
+//// We need the view model associated with host activity, not fragment itself
+//// Calling ViewModelProviders.of(this: Fragment) will result in a different instance
+///**
+// * Fragment version of getViewModel with lazy factory. Returns null if activity is not attached yet.
+// */
+//inline fun <reified T : ViewModel>
+//        Fragment.getViewModel(lazyFactory: daggerLazy<out VMFactory>): T? =
+//        activity?.run { getViewModel(lazyFactory) }
 
 /**
  * Shortcut for [Transformations.map]

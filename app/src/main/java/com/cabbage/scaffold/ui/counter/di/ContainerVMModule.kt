@@ -4,10 +4,9 @@ import android.content.Context
 import com.cabbage.scaffold.dagger.ActivityScope
 import com.cabbage.scaffold.dagger.ApplicationScope
 import com.cabbage.scaffold.ui.counter.view.CounterActivity
-import com.cabbage.scaffold.ui.counter.domain.AANetworkManager
 import com.cabbage.scaffold.ui.counter.domain.Counter
-import com.cabbage.scaffold.ui.counter.viewmodel.ContainerVMFactory
-import com.cabbage.scaffold.ui.counter.viewmodel.ContainerViewModel
+import com.cabbage.scaffold.ui.counter.viewmodel.CounterVMFactory
+import com.cabbage.scaffold.ui.counter.viewmodel.CounterViewModel
 import com.cabbage.scaffold.ui.daggerLazy
 import com.cabbage.scaffold.ui.getViewModel
 import dagger.Module
@@ -25,23 +24,18 @@ import javax.inject.Named
 object ContainerVMModule {
 
     @Provides @ActivityScope @JvmStatic
-    fun provideViewModel(@ActivityScope lazyVMFac: daggerLazy<ContainerVMFactory>,
-                         @ActivityScope activity: CounterActivity): ContainerViewModel {
+    fun provideViewModel(@ActivityScope lazyVMFac: daggerLazy<CounterVMFactory>,
+                         @ActivityScope activity: CounterActivity): CounterViewModel {
         return activity.getViewModel(lazyVMFac)
     }
 
     @Provides @ActivityScope @JvmStatic
-    fun provideVMFactory(@ActivityScope manager: AANetworkManager,
-                         @Named("Global") globalCounter: Counter,
+    fun provideVMFactory(@Named("Global") globalCounter: Counter,
                          @Named("Local") localCounter: Counter) =
-            ContainerVMFactory(manager, globalCounter, localCounter)
-
-    @Provides @ActivityScope @JvmStatic
-    fun provideNetworkManager(@ApplicationScope @Named("appContext") context: Context) =
-            AANetworkManager(context)
+            CounterVMFactory(globalCounter, localCounter)
 
     @Provides @ActivityScope @JvmStatic
     @Named("Local")
-    fun providesGlobalCounter(@ApplicationScope @Named("appContext") context: Context) =
+    fun providesLocalCounter(@ApplicationScope @Named("appContext") context: Context) =
             Counter(context, "local")
 }

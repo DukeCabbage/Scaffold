@@ -4,13 +4,11 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.cabbage.scaffold.ui.counter.domain.AANetworkManager
 import com.cabbage.scaffold.ui.counter.domain.Counter
 import timber.log.Timber
 
-class ContainerViewModel
-constructor(private val network: AANetworkManager,
-            private val globalCounter: Counter,
+class CounterViewModel
+constructor(private val globalCounter: Counter,
             private val localCounter: Counter) : ViewModel() {
 
     val data: MutableLiveData<String> = MutableLiveData()
@@ -35,11 +33,6 @@ constructor(private val network: AANetworkManager,
 
     init {
         Timber.i("init")
-        fetch()
-    }
-
-    fun fetch() {
-        data.value = network.address
     }
 
     fun increaseLocal() {
