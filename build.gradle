@@ -30,6 +30,8 @@ buildscript {
 
     ext.timber_version = "4.7.1"
 
+    ext.stetho = "1.5.1"
+
     ext.glide_version = "4.8.0"
 
     repositories {

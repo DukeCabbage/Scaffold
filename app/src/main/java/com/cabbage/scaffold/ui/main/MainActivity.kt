@@ -42,8 +42,7 @@ class MainActivity : BaseActivity() {
         tvVersionCode.text = "${BuildConfig.VERSION_CODE}"
 
         fab.setOnClickListener {
-            Intent(this, CounterActivity::class.java)
-                .also { intent -> startActivity(intent) }
+            Intent(this, NextActivity::class.java).also(::startActivity)
         }
 
         fab_theme_1.setOnClickListener {

@@ -1,38 +1,37 @@
 <resources>
-
+    
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorAccent">?themeColorAccent</item>
+        <item name="android:windowBackground">?themeColorScreenBG</item>
+    </style>
+    
+    <style name="AppTheme" parent="BaseAppTheme">
         <item name="colorPrimary">@color/colorIndigo500</item>
         <item name="colorPrimaryDark">@color/colorIndigo700</item>
         <item name="themeColorAccent">@color/colorPinkA200</item>
-        <item name="themeColorScreenBG">@color/colorBrown200</item>
-        <item name="colorAccent">?themeColorAccent</item>
+        <item name="themeColorScreenBG">@color/colorGrey50</item>
     </style>
-
-    <style name="AltAppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    
+    <style name="AltAppTheme" parent="BaseAppTheme">
         <item name="colorPrimary">@color/colorBlue500</item>
         <item name="colorPrimaryDark">@color/colorBlue700</item>
         <item name="themeColorAccent">@color/colorAmber500</item>
-        <item name="themeColorScreenBG">@color/colorBrown200</item>
-        <item name="colorAccent">?themeColorAccent</item>
+        <item name="themeColorScreenBG">@color/colorGrey50</item>
     </style>
-
+    
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
+    
     <style name="AltAppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="FunChip">
-        <item name="android:minHeight">36dp</item>
-    </style>
-
+    
     <!--<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>-->
-
+    
     <!--<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>-->
 
 </resources>

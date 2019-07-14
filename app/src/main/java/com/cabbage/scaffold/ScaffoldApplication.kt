@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import com.cabbage.scaffold.dagger.AppComponent
 import com.cabbage.scaffold.dagger.DaggerAppComponent
+import com.facebook.stetho.Stetho
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 
@@ -29,5 +30,7 @@ class ScaffoldApplication : Application(),
                 .build()
 
         component.inject(this)
+
+        Stetho.initializeWithDefaults(this)
     }
 }
