@@ -2,38 +2,41 @@
 buildscript {
     // Define versions in a single place
 
-    ext.kotlin_version = "1.3.0"
-    ext.gradle_version = '3.3.0'
+    ext.kotlin_version = "1.3.41"
+    ext.gradle_version = '3.4.2'
 
-    ext.support_library_version = "28.0.0"
-
-    ext.arch = [
-            lifecycle: "1.1.1"
+    // Reference this for latest releases
+    // https://developer.android.com/jetpack/androidx/versions/
+    ext.androidx = [
+            appcompat : "1.0.2",
+            lifecycle : "2.0.0",
+    ]
+    ext.google = [
+            material: "1.0.0"
     ]
 
-    ext.dagger_version = "2.19"
+    ext.dagger = [
+            "core"   : "2.21",
+            "android": "2.21"
+    ]
 
-    ext.rx_java2_version = "2.2.5"
-    ext.rx_android_version = "2.1.0"
-    ext.rx_kotlin_version = "2.3.0"
-    ext.rx_permission = "0.9.4"
-//    ext.rx_binding = "2.0.0"
-    ext.rx_preferences = "2.0.0"
+    ext.rxJava2 = [
+            java       : "2.2.5",
+            android    : "2.1.1",
+            kotlin     : "2.3.0",
+            permission : "0.9.4",
+            perferences: "2.0.0"
+    ]
 
-    ext.retrofit2_version = "2.3.0"
-    ext.okhttp3_version = "3.8.1"
     ext.timber_version = "4.7.1"
-
-//    ext.butter_knife_version = "8.8.1"
-//    ext.dart_version = "2.0.+"
 
     ext.glide_version = "4.8.0"
 
     repositories {
         google()
         jcenter()
-        mavenCentral()
     }
+
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"

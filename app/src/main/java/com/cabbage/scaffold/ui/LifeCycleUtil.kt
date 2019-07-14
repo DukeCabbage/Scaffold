@@ -2,8 +2,8 @@
 
 package com.cabbage.scaffold.ui
 
-import android.arch.lifecycle.*
-import android.support.v4.app.FragmentActivity
+import androidx.lifecycle.*
+import androidx.fragment.app.FragmentActivity
 import timber.log.Timber
 
 /**
@@ -20,7 +20,7 @@ typealias VMFactory = ViewModelProvider.Factory
  * necessary for us to implement custom [ViewModelProvider.Factory]
  */
 inline fun <reified T : ViewModel>
-        FragmentActivity.getViewModel(lazyFactory: daggerLazy<out VMFactory>): T =
+        androidx.fragment.app.FragmentActivity.getViewModel(lazyFactory: daggerLazy<out VMFactory>): T =
         try {
             Timber.d("Provide cached VM")
             ViewModelProviders.of(this)[T::class.java]

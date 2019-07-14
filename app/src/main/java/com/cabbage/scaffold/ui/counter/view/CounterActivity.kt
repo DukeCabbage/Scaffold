@@ -1,8 +1,8 @@
 package com.cabbage.scaffold.ui.counter.view
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.cabbage.scaffold.R
 import com.cabbage.scaffold.ui.base.BaseActivity
 import com.cabbage.scaffold.ui.counter.viewmodel.CounterViewModel
@@ -18,7 +18,7 @@ class CounterActivity : BaseActivity(),
 
     @Inject lateinit var viewModel: CounterViewModel
 
-    @Inject lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject lateinit var fragmentInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
 
     override fun supportFragmentInjector() = fragmentInjector
 

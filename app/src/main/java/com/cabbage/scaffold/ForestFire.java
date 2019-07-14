@@ -1,6 +1,6 @@
 package com.cabbage.scaffold;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import timber.log.Timber;
 

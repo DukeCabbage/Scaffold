@@ -1,9 +1,9 @@
 package com.cabbage.scaffold.ui.counter.view
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_counter.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class CounterFragment : Fragment() {
+class CounterFragment : androidx.fragment.app.Fragment() {
 
     @Inject lateinit var viewModel: CounterViewModel
 

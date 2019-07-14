@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.res.Configuration
 import android.graphics.Point
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.DisplayMetrics
 import android.widget.Toast
 
@@ -32,7 +32,7 @@ object ViewUtil {
 val Activity.isLandscape: Boolean
     get() = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-val Fragment.isLandscape: Boolean?
+val androidx.fragment.app.Fragment.isLandscape: Boolean?
     get() = activity?.isLandscape
 
 fun Context.toast(messageResId: Int, duration: Int = Toast.LENGTH_LONG) =

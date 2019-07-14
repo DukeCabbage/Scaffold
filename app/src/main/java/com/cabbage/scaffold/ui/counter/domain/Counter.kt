@@ -1,7 +1,7 @@
 package com.cabbage.scaffold.ui.counter.domain
 
 import android.app.Application
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import android.content.Context
 import timber.log.Timber
 

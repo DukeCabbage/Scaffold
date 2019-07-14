@@ -2,7 +2,7 @@ package com.cabbage.scaffold.ui.counter.view
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_control_panel.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class ControlPanelFragment : Fragment() {
+class ControlPanelFragment : androidx.fragment.app.Fragment() {
 
     @Inject lateinit var viewModel: CounterViewModel
 
