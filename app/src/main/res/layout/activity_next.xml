@@ -4,7 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_increase"
+            android:layout_width="140dp"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="4dp"
+            android:text="Increase" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_reset"
+            android:layout_width="140dp"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="4dp"
+            android:text="Reset" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom|end"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sub"
+            android:layout_width="140dp"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="4dp"
+            android:text="Subscribe" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_un_sub"
+            android:layout_width="140dp"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="4dp"
+            android:text="Unsubscribe" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tvBundleData"
         android:layout_width="wrap_content"
@@ -14,6 +58,6 @@
         android:padding="@dimen/small_space"
         android:textAlignment="center"
         android:textSize="22sp"
-        tools:text="Some sample"/>
+        tools:text="Some sample" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
