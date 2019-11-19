@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.cabbage.scaffold.BuildConfig
 import com.cabbage.scaffold.R
@@ -85,9 +86,26 @@ class MainActivity : BaseActivity() {
         Timber.v("onDestroy")
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val message = when (item.itemId) {
+            R.id.action_refresh -> "Refresh"
+            R.id.action_share -> "Share"
+            R.id.action_favorite -> "Favourite"
+            else -> null
+        }
+
+        if (message != null) {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
     }
 
     private fun showLocationPermissionResult(granted: Boolean) {
@@ -98,9 +116,9 @@ class MainActivity : BaseActivity() {
 
         val locationPermission = Manifest.permission.ACCESS_FINE_LOCATION
         permissionSubscription = rxPermissions.request(locationPermission)
-                .subscribeBy(
-                        onNext = { showLocationPermissionResult(it) },
-                        onError = { e -> Timber.e(e) }
-                )
+            .subscribeBy(
+                onNext = { showLocationPermissionResult(it) },
+                onError = { e -> Timber.e(e) }
+            )
     }
 }
